@@ -71,15 +71,12 @@ for i in range(WIDTH):
 	r = create_red_from_base(rgb[0])
 	g = create_green_from_base(rgb[1])
 	b = create_blue_from_base(rgb[2])
-	print (r,g,b)
 	for j in range (HEIGHT):
 		r = create_red_from_base(rgb[0])
 		g = create_green_from_base(rgb[1])
 		b = create_blue_from_base(rgb[2])
 		img.putpixel((j,i),(r,g,b))
-		print (r,g,b)
 	img.putpixel((j,i),(r,g,b))
 img.save('tile.png') # or any image format
 with open("tile.png", "rb") as image_file:
     encoded_string = base64.b64encode(image_file.read())
-print(encoded_string.decode('utf-8'))
