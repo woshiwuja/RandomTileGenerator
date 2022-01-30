@@ -4,7 +4,6 @@ from PIL import Image, ImageColor
 from numpy import random
 HEIGHT = 16 # 16 * 3
 WIDTH = 16 
-#TILE = np.empty(shape=(WIDTH,HEIGHT), dtype=Uint8ClampedArray)
 PIXEL = np.zeros([1,3],dtype=object)
 r = 0
 g = 0
@@ -28,7 +27,7 @@ def create_random_pixel(r,g,b):
 	PIXEL = ([r,g,b])
 	return PIXEL
 
-img = Image.new('RGB', (16,16)) # create the Image of size 1 pixel 
+img = Image.new('RGB', (16,16)) 
 for i in range(16):
 	r = create_red_channel(r)
 	g = create_green_channel(g)
