@@ -1,10 +1,9 @@
 import numpy as np
-import png
 from PIL import Image, ImageColor
 from numpy import random
+import base64
 HEIGHT = 16
 WIDTH = 16 
-PIXEL = np.zeros([1,3],dtype=object)
 r = 255
 g = 255
 b = 255
@@ -29,15 +28,6 @@ def create_random_blue_channel(b):
 	if noise <= 10 and b<245:
 		b += noise
 	return b
-def create_random_pixel(r,g,b):
-	r = 0
-	g = 0
-	b = 0
-	r = create_red_channel(r)
-	g = create_green_channel(g)
-	b = create_blue_channel(b)
-	PIXEL = ([r,g,b])
-	return PIXEL
 
 def create_red_from_base(r):
 	noise = random.randint(100)
@@ -72,14 +62,17 @@ rgb.append(g)
 inputTextB = input("Insert B:")
 b = int(inputTextB)
 rgb.append(b)
-
+inputTextH = input("Insert height:")
+inputTextW = input("Insert width:")
+HEIGHT = int(inputTextH)
+WIDTH = int(inputTextW)
 img = Image.new('RGB', (HEIGHT,WIDTH)) # create the Image of size Height*Width pixel 
-for i in range(16):
+for i in range(WIDTH):
 	r = create_red_from_base(rgb[0])
 	g = create_green_from_base(rgb[1])
 	b = create_blue_from_base(rgb[2])
 	print (r,g,b)
-	for j in range (16):
+	for j in range (HEIGHT):
 		r = create_red_from_base(rgb[0])
 		g = create_green_from_base(rgb[1])
 		b = create_blue_from_base(rgb[2])
@@ -87,3 +80,6 @@ for i in range(16):
 		print (r,g,b)
 	img.putpixel((j,i),(r,g,b))
 img.save('tile.png') # or any image format
+with open("tile.png", "rb") as image_file:
+    encoded_string = base64.b64encode(image_file.read())
+print(encoded_string.decode('utf-8'))
