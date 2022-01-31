@@ -8,27 +8,6 @@ r = 255
 g = 255
 b = 255
 
-def create_random_red_channel(r):
-	noise = random.randint(100)
-	r = random.randint(10,70)
-	if noise <= 10 and r<245:
-		r += noise
-	return r
-
-def create_random_green_channel(g):
-	noise = random.randint(100)
-	g = random.randint(200,255)
-	if noise <= 10 and g<245:
-		g += noise
-	return g
-
-def create_random_blue_channel(b):
-	noise = random.randint(100)
-	b = random.randint(55,90)
-	if noise <= 10 and b<245:
-		b += noise
-	return b
-
 def create_red_from_base(r):
 	noise = random.randint(100)
 	if noise <= 20 and r<125:
@@ -64,6 +43,7 @@ b = int(inputTextB)
 rgb.append(b)
 inputTextH = input("Insert height:")
 inputTextW = input("Insert width:")
+inputTextImageName = input("Insert new file name + extension:")
 HEIGHT = int(inputTextH)
 WIDTH = int(inputTextW)
 img = Image.new('RGB', (HEIGHT,WIDTH)) # create the Image of size Height*Width pixel 
@@ -77,6 +57,6 @@ for i in range(WIDTH):
 		b = create_blue_from_base(rgb[2])
 		img.putpixel((j,i),(r,g,b))
 	img.putpixel((j,i),(r,g,b))
-img.save('tile.png') # or any image format
-with open("tile.png", "rb") as image_file:
+img.save(inputTextImageName) # or any image format
+with open(inputTextImageName, "rb") as image_file:
     encoded_string = base64.b64encode(image_file.read())
